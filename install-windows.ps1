@@ -15,7 +15,10 @@ if (-not (Get-Command claude -ErrorAction SilentlyContinue)) { irm https://claud
 $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Environment]::GetEnvironmentVariable("Path","User") + ";$HOME\.local\bin"
 
 Write-Host "== 3/5 GitHub login (account coder-kiran123) =="
-gh auth status 2>$null; if ($LASTEXITCODE -ne 0) { gh auth login --web -h github.com -p https --git-protocol https }
+$ErrorActionPreference = "Continue"
+gh auth status *> $null
+if ($LASTEXITCODE -ne 0) { gh auth login --web -h github.com -p https --git-protocol https }
+$ErrorActionPreference = "Stop"
 
 Write-Host "== 4/5 Downloading tracking system =="
 if (Test-Path "$Dir\.git") { git -C $Dir pull -q } else { gh repo clone $Repo $Dir }

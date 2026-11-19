@@ -1,5 +1,6 @@
 #!/bin/bash
-# Shipment Tracking - one-click setup for Mac. Double-click this file.
+# Shipment Tracking - setup for Mac.
+# Run in Terminal:  bash ~/Downloads/install-mac.command
 set -e
 REPO="coder-kiran123/shipment-tracking"
 DIR="$HOME/sirjan"
@@ -14,7 +15,14 @@ if [ ! -d "/Applications/Google Chrome.app" ]; then
   open "https://www.google.com/chrome/"; exit 1
 fi
 
-echo "== 2/5 Installing Claude =="
+echo "== 2/5 Checking Apple developer tools (git) =="
+if ! xcode-select -p >/dev/null 2>&1; then
+  xcode-select --install || true
+  echo ">> A window opened: click Install and wait until it finishes."
+  until xcode-select -p >/dev/null 2>&1; do sleep 10; done
+fi
+
+echo "== Installing Claude =="
 command -v claude >/dev/null || curl -fsSL https://claude.ai/install.sh | bash
 
 echo "== 3/5 Installing GitHub tool =="
