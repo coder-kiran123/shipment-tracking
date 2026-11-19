@@ -16,7 +16,7 @@ Then click "Add to Chrome" for Claude in Chrome when asked, and type `/track`.
 Manual steps: [SETUP_NEW_PC.txt](SETUP_NEW_PC.txt)
 
 ## Daily use
-1. Save your Excel to Downloads as `tracking.xlsx`
+1. Download your Excel to Downloads (any name)
 2. Mac: double-click `start-tracking.command` (or `cd ~/sirjan && claude --chrome`)
 3. Type `/track`
 

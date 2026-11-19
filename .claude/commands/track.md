@@ -3,7 +3,7 @@ description: Update ETD/ETA for all shipments from Maersk, CMA CGM and MSC websi
 ---
 Daily shipment tracking update.
 
-1. Find the newest tracking Excel file: check ~/Downloads and this folder for `tracking*.xlsx` (use the most recently modified one). If the user gave a file path in $ARGUMENTS, use that instead.
+1. Find the shipment Excel file: if the user gave a file path in $ARGUMENTS, use that. Otherwise look at the .xlsx files in ~/Downloads (and this folder), newest first, and use the newest one that has the columns "BL No" and "Carrier". Any file name is fine. Tell the user which file you used.
 2. Read every shipment row where Carrier is Maersk, CMA CGM or MSC. Use the BL No column (Maersk: the 9-digit number; CMA CGM: OEA...; MSC: MEDU...). Excel dates may be stored as serial numbers and may have day/month swapped — treat the carrier website as the truth.
 3. Using Claude in Chrome, open each carrier's tracking page and read the current ETD (departure from loading port) and ETA (arrival at discharge port):
    - Maersk: https://www.maersk.com/tracking/<BL>
