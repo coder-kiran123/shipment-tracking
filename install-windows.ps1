@@ -1,29 +1,23 @@
 # Shipment Tracking - setup for Windows.
-# Right-click this file -> "Run with PowerShell"
+# In PowerShell run:
+#   irm https://raw.githubusercontent.com/coder-kiran123/shipment-tracking/main/install-windows.ps1 | iex
 $ErrorActionPreference = "Stop"
 $Repo = "coder-kiran123/shipment-tracking"
 $Dir  = "$HOME\sirjan"
 
-Write-Host "== 1/5 Checking Google Chrome =="
+Write-Host "== 1/4 Checking Google Chrome =="
 $chrome = @("$env:ProgramFiles\Google\Chrome\Application\chrome.exe","${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe","$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1
 if (-not $chrome) { winget install -e --id Google.Chrome --accept-source-agreements --accept-package-agreements }
 
-Write-Host "== 2/5 Installing Git, GitHub tool and Claude =="
+Write-Host "== 2/4 Installing Git and Claude =="
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) { winget install -e --id Git.Git --accept-source-agreements --accept-package-agreements }
-if (-not (Get-Command gh  -ErrorAction SilentlyContinue)) { winget install -e --id GitHub.cli --accept-source-agreements --accept-package-agreements }
 if (-not (Get-Command claude -ErrorAction SilentlyContinue)) { irm https://claude.ai/install.ps1 | iex }
 $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Environment]::GetEnvironmentVariable("Path","User") + ";$HOME\.local\bin"
 
-Write-Host "== 3/5 GitHub login (account coder-kiran123) =="
-$ErrorActionPreference = "Continue"
-gh auth status *> $null
-if ($LASTEXITCODE -ne 0) { gh auth login --web -h github.com -p https --git-protocol https }
-$ErrorActionPreference = "Stop"
+Write-Host "== 3/4 Downloading tracking system =="
+if (Test-Path "$Dir\.git") { git -C $Dir pull -q } else { git clone -q "https://github.com/$Repo.git" $Dir }
 
-Write-Host "== 4/5 Downloading tracking system =="
-if (Test-Path "$Dir\.git") { git -C $Dir pull -q } else { gh repo clone $Repo $Dir }
-
-Write-Host "== 5/5 Claude in Chrome extension =="
+Write-Host "== 4/4 Claude in Chrome extension =="
 Start-Process "https://chromewebstore.google.com/search/Claude%20in%20Chrome"
 Read-Host ">> In Chrome: Add 'Claude in Chrome' and sign in. Press Enter when done"
 

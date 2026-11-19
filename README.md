@@ -2,12 +2,16 @@
 
 Daily ETD/ETA update for shipments, using Claude Code + Claude in Chrome.
 
-## Setup on a new PC (one click)
-1. On github.com (logged in as coder-kiran123) open this repo and download the installer:
-   - **Mac:** download `install-mac.command`, open Terminal and run: `bash ~/Downloads/install-mac.command`
-   - **Windows:** `install-windows.ps1` -> right-click -> Run with PowerShell
-2. Follow the 2 prompts: GitHub login code, and "Add to Chrome" for Claude in Chrome.
-3. Type `/track`.
+## Setup on a new PC (one line)
+**Mac** - open Terminal and paste:
+```
+curl -fsSL https://raw.githubusercontent.com/coder-kiran123/shipment-tracking/main/install-mac.command | bash
+```
+**Windows** - open PowerShell and paste:
+```
+irm https://raw.githubusercontent.com/coder-kiran123/shipment-tracking/main/install-windows.ps1 | iex
+```
+Then click "Add to Chrome" for Claude in Chrome when asked, and type `/track`.
 
 Manual steps: [SETUP_NEW_PC.txt](SETUP_NEW_PC.txt)
 
