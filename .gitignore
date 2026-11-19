@@ -1,0 +1,7 @@
+# Shipment data stays private on your PC - never pushed
+*.csv
+*.xlsx
+*.xls
+*.pdf
+.DS_Store
+.claude/settings.local.json

@@ -1,0 +1,36 @@
+SHIPMENT TRACKING - SETUP ON A NEW COMPUTER
+===========================================
+
+1. COPY THIS FOLDER
+   Copy the whole "sirjan" folder (USB / Google Drive / email zip) to the new PC.
+   Put it in your home folder:  Mac: /Users/<you>/sirjan   Windows: C:\Users\<you>\sirjan
+   It must include the hidden folder ".claude" (it has the /track command).
+   Mac: in Finder press Cmd+Shift+. to see hidden folders.
+
+2. INSTALL GOOGLE CHROME
+   https://www.google.com/chrome
+
+3. INSTALL "CLAUDE IN CHROME" EXTENSION
+   Chrome Web Store -> search "Claude in Chrome" (by Anthropic) -> Add to Chrome -> Sign in.
+
+4. INSTALL CLAUDE (terminal version)
+   Mac  (Terminal):    curl -fsSL https://claude.ai/install.sh | bash
+                       echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+   Windows (PowerShell): irm https://claude.ai/install.ps1 | iex
+   Close and reopen Terminal / PowerShell after installing.
+
+5. FIRST START
+   cd ~/sirjan
+   claude --chrome
+   - Theme: press Enter
+   - Login: choose Claude account, click Authorize in browser
+   - Trust this folder: Yes
+   - Type /chrome -> check "Status: enabled" and "Extension: installed"
+
+DAILY USE
+=========
+   1. Save your Excel to Downloads as tracking.xlsx
+   2. Terminal:  cd ~/sirjan && claude --chrome
+   3. Type:      /track
+   4. Choose "Allow" when asked; solve robot checks in Chrome
+   5. Read the list of changed ETD/ETA. Result saved as tracking_YYYY-MM-DD.csv
